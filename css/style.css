@@ -278,7 +278,11 @@ img { display: block; max-width: 100%; }
    --------------------------------------------------------------------- */
 .about,
 .gallery,
-.contact {
+.contact,
+.services,
+.packages,
+.process,
+.faq {
   padding: var(--pad-y) var(--pad-x);
   border-top: 0.5px solid var(--border-section);
 }
@@ -1070,4 +1074,214 @@ img { display: block; max-width: 100%; }
   .team__details dd {
     text-align: left;
   }
+}
+
+/* ---------------------------------------------------------------------
+   17. Homepage sales sections — services, packages, process, FAQ
+   --------------------------------------------------------------------- */
+.section-head { margin-bottom: 48px; }
+
+/* Services — three-column editorial grid */
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 3vw, 48px);
+}
+
+.service {
+  border-top: 0.5px solid var(--border-section);
+  padding-top: 20px;
+}
+
+.service__num {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--faint);
+  margin-bottom: 14px;
+}
+
+.service__title {
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-bottom: 10px;
+}
+
+.service__desc {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 36ch;
+}
+
+/* Packages — three pricing cards, Signature highlighted */
+.packages__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 2vw, 24px);
+  align-items: stretch;
+}
+
+.package {
+  display: flex;
+  flex-direction: column;
+  border: 0.5px solid var(--border);
+  padding: 32px 28px;
+}
+
+.package--featured {
+  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.03);
+}
+
+.package__badge {
+  align-self: flex-start;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--bg);
+  background: #FFFFFF;
+  padding: 5px 10px;
+  margin-bottom: 16px;
+}
+
+.package__name {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.package__for {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+.package__price {
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  margin: 24px 0;
+}
+
+.package__list {
+  list-style: none;
+  margin: 0 0 28px;
+  border-top: 0.5px solid var(--border-section);
+}
+
+.package__list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 0.5px solid var(--border-section);
+}
+
+.package__list li span:first-child {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--faint);
+}
+
+.package__list li span:last-child {
+  font-size: 12px;
+  color: rgba(255,255,255,0.72);
+  text-align: right;
+}
+
+.package .btn {
+  margin-top: auto;
+  text-align: center;
+}
+
+/* Booking process — four numbered steps */
+.process__steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 2.5vw, 40px);
+  margin: 0;
+  padding: 0;
+}
+
+.process__step {
+  border-top: 0.5px solid var(--border-section);
+  padding-top: 20px;
+}
+
+.process__num {
+  display: block;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--faint);
+  margin-bottom: 14px;
+}
+
+.process__step h3 {
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.process__step p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* FAQ — native accessible accordion, no JS */
+.faq__list {
+  max-width: 760px;
+  border-top: 0.5px solid var(--border-section);
+}
+
+.faq__item {
+  border-bottom: 0.5px solid var(--border-section);
+}
+
+.faq__item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0;
+  font-size: 15px;
+}
+
+.faq__item summary::-webkit-details-marker { display: none; }
+
+.faq__item summary::after {
+  content: "+";
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.faq__item[open] summary::after { content: "\2013"; }
+
+.faq__answer {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 60ch;
+  padding: 0 0 22px;
+}
+
+/* Sales sections — tablet */
+@media (max-width: 880px) {
+  .services__grid { grid-template-columns: repeat(2, 1fr); }
+  .packages__grid { grid-template-columns: 1fr; }
+  .process__steps { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Sales sections — mobile */
+@media (max-width: 560px) {
+  .services__grid { grid-template-columns: 1fr; }
+  .process__steps { grid-template-columns: 1fr; }
+  .package { padding: 28px 22px; }
 }
