@@ -1508,3 +1508,108 @@ img { display: block; max-width: 100%; }
   /* Reserve space so the button never sits over footer text */
   .footer { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
 }
+
+/* ---------------------------------------------------------------------
+   21. Opening animation overlay (homepage, once per session)
+   --------------------------------------------------------------------- */
+.opening { display: none; }              /* hidden unless JS activates it */
+body.opening-lock { overflow: hidden; }  /* hold scroll during the sequence */
+
+.opening.is-active {
+  display: block;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--bg);
+  z-index: 1000;
+  perspective: 1100px;
+  opacity: 1;
+  transition: opacity .38s ease;
+}
+.opening.is-gone { opacity: 0; pointer-events: none; }
+
+.opening__stage {
+  position: absolute;
+  inset: 0;
+  transform-origin: center center;
+  transform: translateZ(0) scale(1);
+  transition: transform .9s cubic-bezier(.34, .0, .2, 1);
+}
+.opening__layer { position: absolute; inset: 0; }
+.opening__layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 45%;
+  display: block;
+}
+@media (max-width: 600px) {
+  .opening__layer img { object-position: 50% 32%; }
+}
+
+.opening__blur img { filter: blur(14px) brightness(0.45); transform: scale(1.06); }
+.opening__blur { transition: opacity .75s ease; }
+.opening__sharp img { filter: brightness(0.78); }
+.opening__sharp { clip-path: inset(50% 50% 50% 50%); -webkit-clip-path: inset(50% 50% 50% 50%); }
+
+.opening.is-push .opening__stage { transform: translateZ(150px) scale(1.05); }
+.opening.is-push .opening__blur { opacity: 0; }
+
+.opening__vignette {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  opacity: 0.18;
+  transform-origin: center center;
+  background: radial-gradient(circle at center, transparent 40%, #000 100%);
+  z-index: 3;
+}
+.opening.is-push .opening__vignette { animation: openingVig .9s cubic-bezier(.34,.0,.2,1) forwards; }
+@keyframes openingVig {
+  0%   { opacity: .18; transform: scale(1); }
+  35%  { opacity: .72; transform: scale(1.15); }
+  100% { opacity: 0;   transform: scale(2.6); }
+}
+
+.opening__brackets {
+  position: absolute;
+  left: 0; top: 0; width: 0; height: 0;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 4;
+  transform-origin: center center;
+  transition: left .25s ease, top .25s ease, width .25s ease, height .25s ease, opacity .3s ease;
+}
+.opening.is-push .opening__brackets {
+  transform: scale(1.9);
+  opacity: 0;
+  transition: transform .7s cubic-bezier(.34,.0,.2,1), opacity .55s ease;
+}
+.opening__corner { position: absolute; width: 18px; height: 18px; border: 1.5px solid rgba(255,255,255,0.85); }
+.opening__corner--tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+.opening__corner--tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+.opening__corner--bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+.opening__corner--br { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+.opening__skip {
+  position: absolute;
+  top: calc(20px + env(safe-area-inset-top, 0px));
+  right: 20px;
+  z-index: 6;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  cursor: pointer;
+  padding: 8px;
+  transition: color .3s ease;
+}
+.opening__skip:hover, .opening__skip:focus-visible { color: var(--text); }
+
+/* Reduced motion — never show the opening overlay */
+@media (prefers-reduced-motion: reduce) {
+  .opening { display: none !important; }
+}

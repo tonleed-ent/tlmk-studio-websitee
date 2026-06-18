@@ -27,6 +27,23 @@
 </head>
 <body>
 
+  <!-- ===================== OPENING ANIMATION ===================== -->
+  <!-- Decorative overlay; runs once per session above the real homepage. -->
+  <div class="opening" id="opening">
+    <div class="opening__stage" id="opening-stage">
+      <div class="opening__layer opening__blur"><img src="images/hero.jpg" alt="" id="opening-blur-img"></div>
+      <div class="opening__layer opening__sharp" id="opening-sharp"><img src="images/hero.jpg" alt="" id="opening-hero-img"></div>
+    </div>
+    <div class="opening__vignette"></div>
+    <div class="opening__brackets" id="opening-brackets">
+      <span class="opening__corner opening__corner--tl"></span>
+      <span class="opening__corner opening__corner--tr"></span>
+      <span class="opening__corner opening__corner--bl"></span>
+      <span class="opening__corner opening__corner--br"></span>
+    </div>
+    <button class="opening__skip" id="opening-skip" type="button">Skip</button>
+  </div>
+
   <!-- ============================ NAV ============================ -->
   <header class="nav">
     <a href="index.html" class="nav__logo">TLMK Studio</a>

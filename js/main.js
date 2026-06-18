@@ -5,6 +5,129 @@
    2. Portfolio lightbox (click to open, ESC / close button to dismiss)
    ===================================================================== */
 
+/* =====================================================================
+   Opening animation — homepage only, once per browser session.
+   Overlays the real page, then removes itself and restores interaction.
+   ===================================================================== */
+(function () {
+  'use strict';
+
+  var opening = document.getElementById('opening');
+  if (!opening) return; // not the homepage
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Session gate + fail-safe: if storage is unavailable, just show the page.
+  var seen = false, storeOk = true;
+  try { seen = window.sessionStorage.getItem('tlmkOpeningSeen') === '1'; }
+  catch (e) { storeOk = false; }
+
+  if (reduced || seen || !storeOk) return; // overlay stays display:none
+
+  try { window.sessionStorage.setItem('tlmkOpeningSeen', '1'); } catch (e) {}
+
+  var stage = document.getElementById('opening-stage');
+  var sharp = document.getElementById('opening-sharp');
+  var brackets = document.getElementById('opening-brackets');
+  var skip = document.getElementById('opening-skip');
+  var heroImg = document.getElementById('opening-hero-img');
+  var blurImg = document.getElementById('opening-blur-img');
+  if (!stage || !sharp || !brackets) return;
+
+  // If the hero image already failed to load, never start; show the homepage.
+  function imgFailed(img) { return img && img.complete && img.naturalWidth === 0; }
+  if (imgFailed(heroImg) || imgFailed(blurImg)) return;
+
+  var removed = false;
+  function removeOverlay(immediate) {
+    if (removed) return;
+    removed = true;
+    opening.classList.add('is-gone');
+    window.setTimeout(function () {
+      opening.style.display = 'none';
+      opening.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('opening-lock');
+    }, immediate ? 0 : 380);
+  }
+
+  // Reveal the homepage if the hero image errors mid-way.
+  if (heroImg) heroImg.addEventListener('error', function () { removeOverlay(true); });
+  if (blurImg) blurImg.addEventListener('error', function () { removeOverlay(true); });
+
+  // Activate overlay + hold scroll for the duration.
+  opening.classList.add('is-active');
+  document.body.classList.add('opening-lock');
+  if (skip) skip.addEventListener('click', function () { removeOverlay(true); });
+
+  // Hard safety net: never leave the overlay up longer than this.
+  window.setTimeout(function () { removeOverlay(true); }, 3400);
+
+  var W, H, rectW, rectH, start, centre;
+  function measure() {
+    W = window.innerWidth; H = window.innerHeight;
+    rectW = Math.min(W * 0.46, 440);
+    rectH = rectW * 0.66;
+    start = { x: W * 0.30, y: H * 0.36 };
+    centre = { x: W * 0.5, y: H * 0.5 };
+  }
+  measure();
+
+  function smooth(t) { return t * t * (3 - 2 * t); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function setClip(cx, cy, w, h) {
+    var t = Math.max(0, cy - h / 2);
+    var b = Math.max(0, H - (cy + h / 2));
+    var l = Math.max(0, cx - w / 2);
+    var r = Math.max(0, W - (cx + w / 2));
+    var v = 'inset(' + t + 'px ' + r + 'px ' + b + 'px ' + l + 'px round 2px)';
+    sharp.style.clipPath = v;
+    sharp.style.webkitClipPath = v;
+  }
+  function setBrackets(cx, cy) {
+    brackets.style.left = (cx - rectW / 2) + 'px';
+    brackets.style.top = (cy - rectH / 2) + 'px';
+    brackets.style.width = rectW + 'px';
+    brackets.style.height = rectH + 'px';
+  }
+
+  var PHASE1 = 1450, LOCK = 150, PUSH = 900, t0 = null, pushed = false;
+
+  setClip(start.x, start.y, rectW, rectH);
+  setBrackets(start.x, start.y);
+  requestAnimationFrame(function () { brackets.style.opacity = '1'; });
+
+  function startPush() {
+    pushed = true;
+    sharp.style.transition = 'clip-path ' + (PUSH / 1000) + 's cubic-bezier(.34,.0,.2,1)';
+    sharp.style.clipPath = 'inset(0)';
+    sharp.style.webkitClipPath = 'inset(0)';
+    opening.classList.add('is-push');
+    window.setTimeout(function () { removeOverlay(false); }, PUSH - 120);
+  }
+
+  function frame(now) {
+    if (removed) return;
+    if (t0 === null) t0 = now;
+    var el = now - t0;
+    if (el < PHASE1) {
+      var p = smooth(el / PHASE1);
+      var cx = lerp(start.x, centre.x, p) + Math.sin(el / 170) * (1 - p) * W * 0.03;
+      var cy = lerp(start.y, centre.y, p);
+      setClip(cx, cy, rectW, rectH);
+      setBrackets(cx, cy);
+      requestAnimationFrame(frame);
+    } else if (el < PHASE1 + LOCK) {
+      setClip(centre.x, centre.y, rectW, rectH);
+      setBrackets(centre.x, centre.y);
+      requestAnimationFrame(frame);
+    } else if (!pushed) {
+      startPush();
+    }
+  }
+  requestAnimationFrame(frame);
+})();
+
 (function () {
   'use strict';
 
