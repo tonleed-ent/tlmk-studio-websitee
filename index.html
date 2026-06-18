@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TLMK Studio — Cinematic photography, London</title>
+  <meta name="description" content="TLMK Studio — modern cinematic photography in London. Portraits, editorial, and urban street.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=3">
+</head>
+<body>
+
+  <!-- ============================ NAV ============================ -->
+  <header class="nav">
+    <a href="index.html" class="nav__logo">TLMK Studio</a>
+    <nav class="nav__links">
+      <a href="index.html#portfolio">Portfolio</a>
+      <a href="about.html">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <button class="nav__toggle" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero hero--home">
+    <div class="hero__image">
+      <img src="images/hero.jpg" alt="TLMK Studio portrait photography">
+    </div>
+    <div class="hero__content">
+      <p class="eyebrow">London · Cinematic photography</p>
+      <h1 class="hero__title">TLMK Studio</h1>
+      <p class="hero__subtitle">Modern portraits, editorial, and urban street.</p>
+      <a href="index.html#contact" class="btn">Book a session</a>
+    </div>
+  </section>
+
+  <!-- ============================ ABOUT ============================ -->
+  <section class="about">
+    <div class="about__text">
+      <p class="eyebrow">About the studio</p>
+      <h2 class="display">Photography that lets the moment breathe.</h2>
+      <p class="body">
+        TLMK Studio is a cinematic photography studio based in London. We work
+        in available light and quiet rooms, shaping portraits and editorial
+        stories that feel honest and unhurried.
+      </p>
+      <p class="body">
+        From the street to the studio, every frame is made with intention —
+        the image stays the hero, the styling stays out of the way.
+      </p>
+      <a href="about.html" class="btn">More about us</a>
+    </div>
+    <div class="about__grid">
+      <div class="ph"><img src="images/tlmk-001.jpg" loading="lazy" alt="TLMK Studio portrait photography"></div>
+      <div class="ph"><img src="images/tlmk-002.jpg" loading="lazy" alt="TLMK Studio portrait photography"></div>
+      <div class="ph"><img src="images/tlmk-002.jpg" loading="lazy" alt="TLMK Studio portrait photography"></div>
+      <div class="ph"><img src="images/tlmk-001.jpg" loading="lazy" alt="TLMK Studio portrait photography"></div>
+    </div>
+  </section>
+
+  <!-- ========================== PORTFOLIO ========================== -->
+  <section class="gallery" id="portfolio">
+    <header class="gallery__head">
+      <p class="eyebrow">Selected work</p>
+      <h2 class="display">Portfolio</h2>
+    </header>
+
+    <div class="gallery__grid">
+      <div class="gallery__stack gallery__stack--left">
+        <figure class="gallery__item gallery__item--tall">
+          <div class="ph"><img src="images/tlmk-001.jpg" loading="lazy" alt="TLMK Studio portrait photography"></div>
+          <figcaption class="gallery__overlay"><span>View</span></figcaption>
+          <span class="gallery__num">TLMK / 001</span>
+        </figure>
+        <figure class="gallery__item gallery__item--wide">
+          <div class="ph"><img src="images/tlmk-004.jpg" loading="lazy" alt="TLMK Studio portrait photography"></div>
+          <figcaption class="gallery__overlay"><span>View</span></figcaption>
+          <span class="gallery__num">TLMK / 004</span>
+        </figure>
+      </div>
+
+      <figure class="gallery__item gallery__item--feature">
+        <div class="gallery__feature-media"><img src="images/tlmk-003.jpg" loading="lazy" alt="TLMK Studio portrait photography"></div>
+        <figcaption class="gallery__overlay"><span>View</span></figcaption>
+        <span class="gallery__num">TLMK / 003</span>
+      </figure>
+
+      <div class="gallery__stack gallery__stack--right">
+        <figure class="gallery__item gallery__item--small">
+          <div class="ph"><img src="images/tlmk-002.jpg" loading="lazy" alt="TLMK Studio portrait photography"></div>
+          <figcaption class="gallery__overlay"><span>View</span></figcaption>
+          <span class="gallery__num">TLMK / 002</span>
+        </figure>
+        <figure class="gallery__item gallery__item--landscape">
+          <div class="ph"><img src="images/tlmk-005.jpg" loading="lazy" alt="TLMK Studio portrait photography"></div>
+          <figcaption class="gallery__overlay"><span>View</span></figcaption>
+          <span class="gallery__num">TLMK / 005</span>
+        </figure>
+        <figure class="gallery__item gallery__item--small">
+          <div class="ph"><img src="images/tlmk-006.jpg" loading="lazy" alt="TLMK Studio portrait photography"></div>
+          <figcaption class="gallery__overlay"><span>View</span></figcaption>
+          <span class="gallery__num">TLMK / 006</span>
+        </figure>
+      </div>
+    </div>
+
+    <div class="gallery__more">
+      <a href="index.html#portfolio" class="btn">View full portfolio</a>
+    </div>
+  </section>
+
+  <!-- =========================== CONTACT =========================== -->
+  <section class="contact" id="contact">
+    <div class="contact__intro">
+      <p class="eyebrow">Bookings</p>
+      <h2 class="display">Book a session.</h2>
+      <p class="body">
+        Tell us what you have in mind. We reply to every enquiry — or reach us
+        directly on Instagram <a href="https://instagram.com/tlmkstudio">@tlmkstudio</a>.
+      </p>
+    </div>
+
+    <form class="contact__form" action="#" method="post">
+      <div class="field">
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+      </div>
+      <div class="field">
+        <input type="email" id="email" name="email" placeholder="Email address" required>
+      </div>
+      <div class="field">
+        <input type="text" id="type" name="type" placeholder="Type of session — portrait, editorial, street">
+      </div>
+      <div class="field">
+        <textarea id="message" name="message" rows="4" placeholder="Tell us about the shoot" required></textarea>
+      </div>
+      <button type="submit" class="btn btn--primary">Send enquiry</button>
+    </form>
+  </section>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="footer">
+    <span class="footer__logo">TLMK Studio</span>
+    <span class="footer__meta">London, UK</span>
+    <a href="https://instagram.com/tlmkstudio" class="footer__meta">@tlmkstudio</a>
+    <span class="footer__meta">© 2026</span>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/tlmk-ambient.js"></script>
+</body>
+</html>

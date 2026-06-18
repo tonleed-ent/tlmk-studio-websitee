@@ -1,0 +1,1007 @@
+/* =====================================================================
+   TLMK Studio — style.css
+   Dark, minimal, editorial. The photography is the only colour.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------------
+   1. Variables
+   --------------------------------------------------------------------- */
+:root {
+  --bg:        #0A0A0A;
+  --text:      #FFFFFF;
+  --muted:     rgba(255,255,255,0.45);
+  --faint:     rgba(255,255,255,0.25);
+  --border:    rgba(255,255,255,0.1);
+  --border-section: rgba(255,255,255,0.07);
+  --hover-bg:  rgba(255,255,255,0.08);
+
+  --pad-y: 80px;
+  --pad-x: 48px;
+}
+
+/* ---------------------------------------------------------------------
+   2. Reset / base
+   --------------------------------------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+
+img { display: block; max-width: 100%; }
+
+/* ---------------------------------------------------------------------
+   3. Shared typography
+   --------------------------------------------------------------------- */
+.eyebrow {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--faint);
+  margin-bottom: 24px;
+}
+
+.display {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.body {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 48ch;
+  margin-top: 24px;
+}
+
+/* ---------------------------------------------------------------------
+   4. Placeholder images
+   --------------------------------------------------------------------- */
+.ph {
+  width: 100%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.02),
+      rgba(255,255,255,0.02) 12px,
+      rgba(255,255,255,0.04) 12px,
+      rgba(255,255,255,0.04) 24px);
+  background-color: #141414;
+  overflow: hidden;
+}
+
+/* Real images fill the placeholder box */
+.ph img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ---------------------------------------------------------------------
+   5. Buttons
+   --------------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border: 0.5px solid rgba(255,255,255,0.4);
+  background: transparent;
+  color: var(--text);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn:hover { background: var(--hover-bg); }
+
+.btn--primary {
+  background: #FFFFFF;
+  color: #0A0A0A;
+  border-color: #FFFFFF;
+}
+
+.btn--primary:hover {
+  background: rgba(255,255,255,0.85);
+}
+
+/* ---------------------------------------------------------------------
+   6. Navigation
+   --------------------------------------------------------------------- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px var(--pad-x);
+  background: linear-gradient(to bottom, rgba(10,10,10,0.85), transparent);
+}
+
+.nav__logo {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+}
+
+.nav__links { display: flex; gap: 32px; }
+
+.nav__links a {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  transition: color 0.3s ease;
+}
+
+.nav__links a:hover { color: var(--text); }
+
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav__toggle span {
+  width: 22px;
+  height: 1px;
+  background: var(--text);
+}
+
+/* ---------------------------------------------------------------------
+   7. Hero — full-bleed
+   --------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 560px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero__image {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  filter: brightness(0.7);
+}
+
+.hero__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Ken Burns — imperceptibly slow zoom/pan on the home hero photo.
+   Clip on the image wrapper so the 12% zoom never spills (mobile hero
+   doesn't clip via the .hero parent). Off when reduced motion is set. */
+.hero--home .hero__image { overflow: hidden; }
+
+@keyframes tlmkKenBurns {
+  0%   { transform: scale(1.0) translate(0, 0); }
+  100% { transform: scale(1.12) translate(-1.5%, -2%); }
+}
+
+.hero--home .hero__image img {
+  animation: tlmkKenBurns 28s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero--home .hero__image img { animation: none; }
+}
+
+.hero__image--video {
+  overflow: hidden;
+}
+
+.hero__video,
+.hero__poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.hero__poster {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__image--video .hero__video {
+    display: none;
+  }
+
+  .hero__image--video .hero__poster {
+    display: block;
+  }
+}
+
+.hero__image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.9), transparent 55%);
+}
+
+.hero__content {
+  position: relative;
+  padding: 0 var(--pad-x) 80px;
+  max-width: 720px;
+}
+
+.hero__title {
+  font-size: clamp(48px, 9vw, 96px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.hero__subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 20px 0 32px;
+}
+
+/* ---------------------------------------------------------------------
+   8. Sections (shared)
+   --------------------------------------------------------------------- */
+.about,
+.gallery,
+.contact {
+  padding: var(--pad-y) var(--pad-x);
+  border-top: 0.5px solid var(--border-section);
+}
+
+/* ---------------------------------------------------------------------
+   9. About — 2 column + image grid
+   --------------------------------------------------------------------- */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.about__text .btn { margin-top: 36px; }
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 180px;
+  gap: 6px;
+}
+
+.about__grid .ph--tall { grid-row: span 2; }
+
+/* ---------------------------------------------------------------------
+   10. Gallery — asymmetric grid + hover
+   --------------------------------------------------------------------- */
+.gallery__head { margin-bottom: 48px; }
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.78fr) minmax(280px, 1.08fr) minmax(180px, 0.72fr);
+  gap: clamp(16px, 2.2vw, 30px);
+  align-items: center;
+}
+
+.gallery__stack {
+  display: grid;
+  gap: clamp(16px, 2.2vw, 30px);
+}
+
+.gallery__stack--left {
+  padding-top: clamp(28px, 6vw, 84px);
+}
+
+.gallery__stack--right {
+  padding-bottom: clamp(20px, 5vw, 72px);
+}
+
+.gallery__item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.gallery__item--tall {
+  height: clamp(360px, 42vw, 560px);
+}
+
+.gallery__item--wide {
+  height: clamp(180px, 20vw, 260px);
+}
+
+.gallery__item--small {
+  height: clamp(220px, 25vw, 330px);
+}
+
+.gallery__item--landscape {
+  height: clamp(160px, 18vw, 240px);
+}
+
+.gallery__item--feature {
+  width: 100%;
+  max-width: 620px;
+  justify-self: center;
+}
+
+.gallery__feature-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gallery__item--feature .gallery__feature-media {
+  transition: filter 0.6s ease;
+}
+
+.gallery__item .ph {
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.gallery__item:hover .ph {
+  transform: scale(1.04);
+  filter: brightness(0.5);
+}
+
+.gallery__item--feature:hover .gallery__feature-media {
+  filter: brightness(0.5);
+}
+
+/* The Loupe — JS dims the grid and lights the photo under the cursor by
+   setting `filter` on each .gallery__item. While active, suppress the
+   hover-darken on the inner media so it doesn't fight the lit photo; the
+   subtle hover scale + "View" overlay stay. Touch variant eases on scroll. */
+.gallery__grid--loupe .gallery__item:hover .ph { filter: none; }
+.gallery__grid--loupe .gallery__item--feature:hover .gallery__feature-media { filter: none; }
+.gallery__grid--loupe-touch .gallery__item { transition: filter 0.45s ease; }
+
+.gallery__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.gallery__overlay span {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+}
+
+.gallery__item:hover .gallery__overlay { opacity: 1; }
+
+.gallery__num {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--faint);
+  z-index: 2;
+}
+
+.gallery__more {
+  margin-top: 48px;
+  text-align: center;
+}
+
+/* ---------------------------------------------------------------------
+   11. Contact — booking form
+   --------------------------------------------------------------------- */
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.contact__intro .body a {
+  color: var(--text);
+  border-bottom: 0.5px solid var(--border);
+  padding-bottom: 1px;
+}
+
+.field { margin-bottom: 28px; }
+
+.field input,
+.field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 0.5px solid rgba(255,255,255,0.2);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 10px 0;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+}
+
+.field input::placeholder,
+.field textarea::placeholder { color: var(--faint); }
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-bottom-color: rgba(255,255,255,0.6);
+}
+
+.contact__form .btn { margin-top: 8px; }
+
+/* ---------------------------------------------------------------------
+   12. Footer
+   --------------------------------------------------------------------- */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 32px;
+  padding: 40px var(--pad-x);
+  border-top: 0.5px solid var(--border-section);
+}
+
+.footer__logo {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+}
+
+.footer__meta {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--faint);
+}
+
+.footer a.footer__meta:hover { color: var(--muted); }
+
+.footer__meta:last-child { margin-left: auto; }
+
+/* ---------------------------------------------------------------------
+   13. Responsive — tablet
+   --------------------------------------------------------------------- */
+@media (max-width: 880px) {
+  :root { --pad-x: 28px; --pad-y: 64px; }
+
+  .about,
+  .contact { grid-template-columns: 1fr; gap: 40px; }
+
+  .gallery__grid {
+    grid-template-columns: 0.95fr 1.05fr;
+  }
+
+  .gallery__stack--left,
+  .gallery__stack--right {
+    padding: 0;
+  }
+
+  .gallery__item--feature {
+    align-self: start;
+  }
+
+  .gallery__stack--right {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gallery__item--small,
+  .gallery__item--landscape {
+    height: 220px;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   14. Responsive — mobile
+   --------------------------------------------------------------------- */
+@media (max-width: 560px) {
+  :root { --pad-x: 20px; --pad-y: 56px; }
+
+  /* Mobile nav: links collapse into a dropdown panel toggled by JS */
+  .nav { flex-wrap: wrap; }
+  .nav__toggle { display: flex; }
+
+  .nav__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.35s ease;
+  }
+
+  .nav--open .nav__links {
+    max-height: 240px;
+    opacity: 1;
+    margin-top: 20px;
+  }
+
+  .nav__links a {
+    padding: 14px 0;
+    border-top: 0.5px solid var(--border-section);
+  }
+
+  .hero { min-height: 480px; }
+  .hero__content { padding-bottom: 56px; }
+
+  .hero--home {
+    height: auto;
+    min-height: 0;
+    display: block;
+    padding-top: 72px;
+    overflow: visible;
+  }
+
+  .hero--home .hero__image {
+    position: relative;
+    inset: auto;
+    z-index: auto;
+    aspect-ratio: 3 / 2;
+    width: 100%;
+  }
+
+  .hero--home .hero__image img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero--home .hero__image::after {
+    background: linear-gradient(to top, rgba(10,10,10,0.55), transparent 48%);
+  }
+
+  .hero--home .hero__content {
+    padding-top: 36px;
+    padding-bottom: 64px;
+  }
+
+  .about__grid { grid-auto-rows: 140px; }
+
+  .gallery__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery__stack,
+  .gallery__stack--right {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gallery__item--feature {
+    max-width: min(100%, 420px);
+    justify-self: center;
+  }
+
+  .gallery__item--tall,
+  .gallery__item--small {
+    height: clamp(220px, 58vw, 320px);
+  }
+
+  .gallery__item--wide,
+  .gallery__item--landscape {
+    height: clamp(150px, 42vw, 220px);
+  }
+
+  .footer { gap: 18px; }
+  .footer__meta:last-child { margin-left: 0; }
+
+  /* Solid backdrop while the dropdown is open so links stay readable */
+  .nav--open { background: var(--bg); }
+}
+
+/* ---------------------------------------------------------------------
+   15. Lightbox
+   --------------------------------------------------------------------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  background: rgba(10,10,10,0.96);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox--open {
+  display: flex;
+  opacity: 1;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox__close:hover { opacity: 1; }
+
+.lightbox__stage {
+  position: relative;
+  max-width: 1100px;
+  max-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox__media {
+  width: 100%;
+  max-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox__media img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+/* Placeholder block inside the lightbox keeps a tall editorial ratio */
+.lightbox__media .ph {
+  width: min(70vw, 640px);
+  height: 80vh;
+}
+
+.lightbox__num {
+  margin-top: 20px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--faint);
+}
+
+@media (max-width: 560px) {
+  .lightbox { padding: 24px; }
+  .lightbox__media .ph { width: 100%; height: 70vh; }
+}
+
+/* ---------------------------------------------------------------------
+   16. About page
+   --------------------------------------------------------------------- */
+
+/* About page hero sits a little shorter so the portrait isn't overwhelming */
+.hero--about { height: 70vh; }
+
+/* Intro — 2 column: square portrait + bio stack */
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: var(--pad-y) var(--pad-x);
+  border-top: 0.5px solid var(--border-section);
+}
+
+.intro__portrait {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.intro__portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.intro__quote {
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 300;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin-top: 24px;
+}
+
+.intro__text .body { max-width: 52ch; }
+
+.intro__text .body + .body {
+  margin-top: 16px;
+}
+
+.intro__list {
+  list-style: none;
+  margin-top: 32px;
+}
+
+.intro__list li {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+  line-height: 2;
+}
+
+/* Stats — three centred items across the full width */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: var(--pad-y) var(--pad-x);
+  border-top: 0.5px solid var(--border-section);
+}
+
+.stats__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.stats__item + .stats__item {
+  border-left: 0.5px solid var(--border-section);
+}
+
+.stats__value {
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+.stats__label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+}
+
+/* Team — numbered portrait cards, asymmetric editorial grid */
+.team {
+  padding: var(--pad-y) var(--pad-x);
+  border-top: 0.5px solid var(--border-section);
+}
+
+.team__head { margin-bottom: 48px; }
+
+.team__grid {
+  display: flex;
+  gap: clamp(16px, 2.2vw, 30px);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.28) transparent;
+  padding-bottom: 18px;
+  margin-right: calc(var(--pad-x) * -1);
+  padding-right: var(--pad-x);
+}
+
+.team__grid::-webkit-scrollbar {
+  height: 2px;
+}
+
+.team__grid::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.08);
+}
+
+.team__grid::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.35);
+}
+
+.team__member {
+  flex: 0 0 calc((100% - 90px) / 4);
+  min-width: 230px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.team__portrait {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+.team__portrait img,
+.team__portrait .ph {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.team__member:hover .team__portrait img,
+.team__member:hover .team__portrait .ph {
+  transform: scale(1.04);
+  filter: brightness(0.85);
+}
+
+.team__info {
+  min-height: 216px;
+  padding-top: 18px;
+  border-top: 0.5px solid rgba(255,255,255,0.16);
+}
+
+.team__num {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--faint);
+  margin-bottom: 10px;
+}
+
+.team__name {
+  font-size: clamp(17px, 1.6vw, 22px);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.15;
+}
+
+.team__role {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-height: 32px;
+  padding: 8px 11px;
+  border: 0.5px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.045);
+  color: rgba(255,255,255,0.78);
+  font-size: 10px;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-top: 14px;
+}
+
+.team__details {
+  display: grid;
+  gap: 0;
+  margin-top: 18px;
+  border-top: 0.5px solid rgba(255,255,255,0.1);
+}
+
+.team__details div {
+  display: grid;
+  grid-template-columns: minmax(78px, 0.72fr) 1fr;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+}
+
+.team__details dt {
+  color: var(--faint);
+  font-size: 9px;
+  line-height: 1.35;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.team__details dd {
+  color: rgba(255,255,255,0.72);
+  font-size: 12px;
+  line-height: 1.35;
+  text-align: right;
+}
+
+/* Full-width feature image */
+.feature {
+  border-top: 0.5px solid var(--border-section);
+}
+
+.feature img {
+  width: 100%;
+  height: clamp(360px, 70vh, 680px);
+  object-fit: cover;
+  display: block;
+}
+
+/* CTA — centred */
+.cta {
+  text-align: center;
+  padding: calc(var(--pad-y) + 24px) var(--pad-x);
+  border-top: 0.5px solid var(--border-section);
+}
+
+.cta .body {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta .btn { margin-top: 36px; }
+
+/* About page — tablet / mobile */
+@media (max-width: 880px) {
+  .intro { grid-template-columns: 1fr; gap: 40px; }
+
+  .team__grid {
+    gap: 24px;
+  }
+
+  .team__member {
+    flex-basis: min(360px, 46vw);
+    min-width: 260px;
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 560px) {
+  /* Stack the stats vertically with horizontal dividers */
+  .stats { grid-template-columns: 1fr; gap: 40px; }
+  .stats__item + .stats__item { border-left: none; }
+
+  .feature img { height: 56vh; }
+
+  .team__grid { gap: 18px; }
+
+  .team__member {
+    flex-basis: 74vw;
+    min-width: 245px;
+    max-width: none;
+  }
+
+  .team__info {
+    min-height: 220px;
+    padding-top: 14px;
+  }
+
+  .team__num {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+  }
+
+  .team__role {
+    width: 100%;
+    justify-content: center;
+    padding: 8px 9px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-align: center;
+  }
+
+  .team__details div {
+    grid-template-columns: 1fr;
+    gap: 5px;
+    padding: 11px 0;
+  }
+
+  .team__details dd {
+    text-align: left;
+  }
+}
