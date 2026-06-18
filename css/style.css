@@ -1435,3 +1435,76 @@ img { display: block; max-width: 100%; }
   .gallery__item .ph,
   .gallery__item--feature .gallery__feature-media { transition: none; }
 }
+
+/* ---------------------------------------------------------------------
+   20. Mobile compression (<=768px) + sticky WhatsApp button
+   --------------------------------------------------------------------- */
+.sticky-book { display: none; }
+
+@media (max-width: 768px) {
+  :root { --pad-y: 44px; }
+
+  /* Tighten headers, body and CTA spacing */
+  .section-head { margin-bottom: 26px; }
+  .gallery__head { margin-bottom: 26px; }
+  .gallery__more { margin-top: 28px; }
+  .about__text .btn { margin-top: 24px; }
+  .body { margin-top: 16px; }
+
+  /* Home gallery — show only the strongest images (hidden on mobile only) */
+  .mobile-hide { display: none; }
+
+  /* Services — compact two-column */
+  .services__grid { grid-template-columns: 1fr 1fr; gap: 18px; }
+  .service { padding-top: 16px; }
+  .service__num { margin-bottom: 10px; }
+  .service__title { font-size: 15px; margin-bottom: 6px; }
+  .service__desc { font-size: 12px; line-height: 1.6; }
+
+  /* Packages — reduce internal padding, keep all info + highlight */
+  .package { padding: 22px 18px; }
+  .package__price { margin: 18px 0; }
+  .package__list { margin-bottom: 22px; }
+  .package__list li { padding: 10px 0; }
+  .signature-bonus { margin-bottom: 22px; padding: 14px 16px; }
+
+  /* Booking process — 2x2 compact grid */
+  .process__steps { grid-template-columns: 1fr 1fr; gap: 22px 18px; }
+  .process__step { padding-top: 16px; }
+  .process__num { font-size: 20px; margin-bottom: 8px; }
+
+  /* FAQ — tighter rows (still collapsed by default) */
+  .faq__item summary { padding: 16px 0; font-size: 14px; }
+  .faq__answer { padding-bottom: 16px; }
+
+  /* Contact — reduce gaps, form stays fully usable */
+  .contact { gap: 28px; }
+  .field { margin-bottom: 18px; }
+  .contact__alt { margin-top: 20px; }
+
+  /* Sticky WhatsApp button — subtle pill, safe-area aware */
+  .sticky-book {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    z-index: 90;
+    padding: 11px 22px;
+    background: rgba(10,10,10,0.82);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 0.5px solid rgba(255,255,255,0.4);
+    color: var(--text);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .sticky-book.is-hidden { display: none; }
+
+  /* Reserve space so the button never sits over footer text */
+  .footer { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+}

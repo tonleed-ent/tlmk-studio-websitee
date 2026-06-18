@@ -78,7 +78,7 @@
           <figcaption class="gallery__overlay"><span>View</span></figcaption>
           <span class="gallery__num">TLMK / 001</span>
         </figure>
-        <figure class="gallery__item gallery__item--wide">
+        <figure class="gallery__item gallery__item--wide mobile-hide">
           <div class="ph"><img src="images/tlmk-004.jpg" loading="lazy" alt="Two women in black and white outfits posing outdoors among greenery"></div>
           <figcaption class="gallery__overlay"><span>View</span></figcaption>
           <span class="gallery__num">TLMK / 004</span>
@@ -97,7 +97,7 @@
           <figcaption class="gallery__overlay"><span>View</span></figcaption>
           <span class="gallery__num">TLMK / 002</span>
         </figure>
-        <figure class="gallery__item gallery__item--landscape">
+        <figure class="gallery__item gallery__item--landscape mobile-hide">
           <div class="ph"><img src="images/tlmk-005.jpg" loading="lazy" alt="Two women posing together with high-rise buildings behind them"></div>
           <figcaption class="gallery__overlay"><span>View</span></figcaption>
           <span class="gallery__num">TLMK / 005</span>
@@ -338,7 +338,25 @@
     <span class="footer__meta">© 2026</span>
   </footer>
 
+  <!-- Mobile-only sticky booking button -->
+  <a href="https://wa.me/TODO_WHATSAPP_NUMBER?text=Hi%20TLMK%20Studio%2C%20I%27m%20interested%20in%20booking%20a%20photoshoot%20in%20London." class="sticky-book" target="_blank" rel="noopener" aria-label="Book a session on WhatsApp">Book on WhatsApp</a>
+
   <script src="js/main.js"></script>
   <script src="js/tlmk-ambient.js"></script>
+  <script>
+    // Hide the sticky button while the contact section is on screen,
+    // so it never covers the form controls.
+    (function () {
+      var btn = document.querySelector('.sticky-book');
+      var contact = document.getElementById('contact');
+      if (!btn || !contact || !('IntersectionObserver' in window)) return;
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          btn.classList.toggle('is-hidden', e.isIntersecting);
+        });
+      }, { threshold: 0 });
+      io.observe(contact);
+    })();
+  </script>
 </body>
 </html>
