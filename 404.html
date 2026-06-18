@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page not found — TLMK Studio</title>
+  <meta name="description" content="The page you were looking for didn't make the final edit. Return home or view the TLMK Studio portfolio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <style>
+    /* 404-only treatment — centred hero with a viewfinder around the number */
+    .hero--404 { align-items: center; justify-content: center; text-align: center; }
+    .hero--404 .hero__content { max-width: 760px; margin: 0 auto; padding: 96px var(--pad-x); }
+
+    .err404__frame { position: relative; display: inline-block; padding: 16px 28px; margin-bottom: 12px; }
+
+    .err404 {
+      display: block;
+      font-size: clamp(88px, 22vw, 200px);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      animation: err404Focus 1.8s ease-out both;
+    }
+
+    /* Viewfinder corner brackets */
+    .err404__frame::before,
+    .err404__frame::after,
+    .vf-corner {
+      content: "";
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border: 1px solid rgba(255,255,255,0.6);
+      animation: vfGlow 5s ease-in-out infinite alternate;
+    }
+    .err404__frame::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+    .err404__frame::after  { top: 0; right: 0; border-left: none; border-bottom: none; }
+    .vf-corner--bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+    .vf-corner--br { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+    .err404__frame { animation: vfBreath 5s ease-in-out infinite alternate; }
+
+    @keyframes err404Focus { from { filter: blur(10px); opacity: 0; } to { filter: blur(0); opacity: 1; } }
+    @keyframes vfBreath { from { transform: scale(1); } to { transform: scale(1.03); } }
+    @keyframes vfGlow { from { opacity: 0.4; } to { opacity: 0.85; } }
+
+    .err404__cta { justify-content: center; margin-top: 8px; }
+
+    .err404__book {
+      display: inline-block;
+      margin-top: 24px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      border-bottom: 0.5px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.3s ease;
+    }
+    .err404__book:hover { color: var(--text); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .err404 { animation: none; filter: none; opacity: 1; }
+      .err404__frame,
+      .err404__frame::before,
+      .err404__frame::after,
+      .vf-corner { animation: none; }
+      .err404__frame::before,
+      .err404__frame::after,
+      .vf-corner { opacity: 0.7; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================ NAV ============================ -->
+  <header class="nav">
+    <a href="index.html" class="nav__logo">TLMK Studio</a>
+    <nav class="nav__links" id="nav-menu">
+      <a href="portfolio.html">Portfolio</a>
+      <a href="about.html">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <button class="nav__toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ============================ 404 ============================ -->
+  <section class="hero hero--404">
+    <div class="hero__image">
+      <img src="images/hero.jpg" alt="">
+    </div>
+    <div class="hero__content">
+      <p class="eyebrow">Frame not found</p>
+
+      <div class="err404__frame">
+        <span class="err404">404</span>
+        <span class="vf-corner vf-corner--bl" aria-hidden="true"></span>
+        <span class="vf-corner vf-corner--br" aria-hidden="true"></span>
+      </div>
+
+      <h1 class="display">This frame didn't make the final edit.</h1>
+      <p class="body" style="margin-left: auto; margin-right: auto;">
+        The page you were looking for may have moved or no longer exists.
+      </p>
+
+      <div class="hero__cta err404__cta">
+        <a href="index.html" class="btn btn--primary">Return home</a>
+        <a href="portfolio.html" class="btn">View portfolio</a>
+      </div>
+
+      <a href="index.html#contact" class="err404__book">Book a session</a>
+    </div>
+  </section>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="footer">
+    <span class="footer__logo">TLMK Studio</span>
+    <span class="footer__meta">London, UK</span>
+    <a href="https://instagram.com/tlmkstudio" class="footer__meta">@tlmkstudio</a>
+    <span class="footer__meta">© 2026</span>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/tlmk-ambient.js"></script>
+</body>
+</html>
