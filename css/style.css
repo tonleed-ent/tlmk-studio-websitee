@@ -1285,3 +1285,87 @@ img { display: block; max-width: 100%; }
   .process__steps { grid-template-columns: 1fr; }
   .package { padding: 28px 22px; }
 }
+
+/* ---------------------------------------------------------------------
+   18. Signature Bonus — premium offer inside the Signature card
+   CSS-only: slow light sweep + gentle glow on the "+5". Monochrome.
+   --------------------------------------------------------------------- */
+.signature-bonus {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 28px;
+  padding: 18px 20px;
+  border: 0.5px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.04);
+  box-shadow: inset 0 0 24px rgba(255,255,255,0.04);
+}
+
+/* Slow diagonal light sweep, pausing off-card between passes */
+.signature-bonus::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.10), transparent);
+  transform: skewX(-18deg);
+  pointer-events: none;
+  animation: bonusSweep 6.5s ease-in-out infinite;
+}
+
+@keyframes bonusSweep {
+  0%        { left: -60%; }
+  55%, 100% { left: 150%; }
+}
+
+.signature-bonus__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.signature-bonus__label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+}
+
+.signature-bonus__plus {
+  font-size: clamp(30px, 4vw, 40px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--text);
+  animation: bonusGlow 3.4s ease-in-out infinite;
+}
+
+@keyframes bonusGlow {
+  0%, 100% { text-shadow: 0 0 0 rgba(255,255,255,0); }
+  50%      { text-shadow: 0 0 14px rgba(255,255,255,0.35); }
+}
+
+.signature-bonus__text {
+  font-size: 12px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.72);
+  margin-top: 12px;
+}
+
+.signature-bonus__note {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+  margin-top: 8px;
+}
+
+/* Reduced motion: no movement; keep a soft static glow only */
+@media (prefers-reduced-motion: reduce) {
+  .signature-bonus::after { display: none; }
+  .signature-bonus__plus {
+    animation: none;
+    text-shadow: 0 0 14px rgba(255,255,255,0.25);
+  }
+}
