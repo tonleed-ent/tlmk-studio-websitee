@@ -558,6 +558,9 @@ img { display: block; max-width: 100%; }
 
 .footer a.footer__meta:hover { color: var(--muted); }
 
+/* Legal links — slightly larger tap target without altering row layout */
+.footer__legal { padding: 6px 0; }
+
 .footer__meta:last-child { margin-left: auto; }
 
 /* ---------------------------------------------------------------------
