@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://cute-crumble-b7a569.netlify.app/sitemap.xml
+Sitemap: https://www.tlmkstudio.co.uk/sitemap.xml
