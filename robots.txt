@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: TODO_SITE_URL/sitemap.xml
+Sitemap: https://cute-crumble-b7a569.netlify.app/sitemap.xml
