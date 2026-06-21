@@ -446,32 +446,99 @@ img { display: block; max-width: 100%; }
   padding-bottom: 1px;
 }
 
-.field { margin-bottom: 28px; }
+/* Trust signals — fills the left column, reinforces the offer */
+.contact__trust {
+  list-style: none;
+  margin: 32px 0 8px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 24px;
+}
+
+.contact__trust li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  color: rgba(255,255,255,0.78);
+}
+
+.contact__trust li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  font-size: 12px;
+  color: var(--text);
+  width: 17px;
+  height: 17px;
+  line-height: 17px;
+  text-align: center;
+  border: 0.5px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+}
+
+/* WhatsApp helper text under the primary contact button */
+.contact__alt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.contact__whatsapp { padding: 15px 32px; font-size: 12px; }
+
+.contact__alt-note {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+/* Elevated glass panel so the form stands out from the page */
+.contact__form {
+  background: rgba(255,255,255,0.035);
+  border: 0.5px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  padding: clamp(28px, 3vw, 44px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+  backdrop-filter: blur(4px);
+}
+
+.field { margin-bottom: 22px; }
 
 .field input,
 .field textarea {
   width: 100%;
-  background: transparent;
-  border: none;
-  border-bottom: 0.5px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 4px;
   color: var(--text);
   color-scheme: dark;
   font-family: inherit;
-  font-size: 13px;
-  padding: 10px 0;
+  font-size: 14px;
+  padding: 13px 14px;
   resize: vertical;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Visible field labels (small uppercase, matches eyebrow language) */
+.field input:hover,
+.field textarea:hover {
+  border-color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.06);
+}
+
+/* Visible field labels — high contrast, clearly readable */
 .field label {
   display: block;
-  font-size: 10px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--faint);
-  margin-bottom: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.82);
+  margin-bottom: 9px;
 }
+
+.field__opt { color: var(--muted); }
 
 .field__opt { letter-spacing: 0.1em; }
 
@@ -484,10 +551,15 @@ img { display: block; max-width: 100%; }
 }
 
 .field--consent input {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   flex: 0 0 auto;
-  margin-top: 2px;
+  margin-top: 1px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   accent-color: #FFFFFF;
 }
 
@@ -497,7 +569,7 @@ img { display: block; max-width: 100%; }
   line-height: 1.6;
   text-transform: none;
   letter-spacing: normal;
-  color: var(--muted);
+  color: rgba(255,255,255,0.7);
 }
 
 .field--consent label a {
@@ -521,15 +593,34 @@ img { display: block; max-width: 100%; }
 .contact__alt { margin-top: 28px; }
 
 .field input::placeholder,
-.field textarea::placeholder { color: var(--faint); }
+.field textarea::placeholder { color: rgba(255,255,255,0.38); }
 
+/* Strong, obvious focus — bright border + soft white glow ring */
 .field input:focus,
 .field textarea:focus {
   outline: none;
-  border-bottom-color: rgba(255,255,255,0.6);
+  border-color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.12);
 }
 
-.contact__form .btn { margin-top: 8px; }
+.field--consent input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.18);
+}
+
+/* Submit — full width and impossible to miss */
+.contact__submit {
+  width: 100%;
+  margin-top: 8px;
+  padding: 17px 28px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+}
+
+.contact__submit:hover {
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.14);
+}
 
 /* ---------------------------------------------------------------------
    12. Footer
@@ -571,6 +662,16 @@ img { display: block; max-width: 100%; }
 
   .about,
   .contact { grid-template-columns: 1fr; gap: 40px; }
+
+  /* Contact — keep the form readable and visible on mobile */
+  .contact__form { padding: 22px 18px; }
+  .field input,
+  .field textarea { font-size: 16px; padding: 13px 13px; } /* 16px avoids iOS zoom */
+  .field label { font-size: 12px; color: rgba(255,255,255,0.85); }
+  .contact__trust { grid-template-columns: 1fr 1fr; gap: 12px 16px; margin-top: 28px; }
+  .contact__trust li { font-size: 13px; }
+  .contact__whatsapp,
+  .contact__submit { width: 100%; text-align: center; }
 
   .gallery__grid {
     grid-template-columns: 0.95fr 1.05fr;
@@ -1088,38 +1189,95 @@ img { display: block; max-width: 100%; }
    --------------------------------------------------------------------- */
 .section-head { margin-bottom: 48px; }
 
-/* Services — three-column editorial grid */
+/* Services — visual cards: thumbnail + tag + large title */
 .services__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(24px, 3vw, 48px);
+  gap: clamp(18px, 2.4vw, 32px);
 }
 
 .service {
-  border-top: 0.5px solid var(--border-section);
-  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-.service__num {
-  display: block;
+.service__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: #141414;
+  margin-bottom: 16px;
+}
+
+.service__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.72);
+  transition: transform 0.7s ease, filter 0.7s ease;
+}
+
+.service:hover .service__media img {
+  transform: scale(1.05);
+  filter: brightness(0.85);
+}
+
+/* Faint bottom fade so the photo settles into the dark page */
+.service__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,0.55), transparent 58%);
+}
+
+/* Category tag — small uppercase chip on the photo */
+.service__tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 1;
   font-size: 10px;
-  letter-spacing: 0.2em;
-  color: var(--faint);
-  margin-bottom: 14px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text);
+  padding: 6px 11px;
+  border: 0.5px solid rgba(255,255,255,0.25);
+  background: rgba(10,10,10,0.35);
+  backdrop-filter: blur(6px);
 }
 
 .service__title {
-  font-size: 17px;
-  font-weight: 400;
-  letter-spacing: 0;
-  margin-bottom: 10px;
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin-bottom: 8px;
 }
 
 .service__desc {
   font-size: 13px;
-  line-height: 1.8;
+  line-height: 1.7;
   color: var(--muted);
-  max-width: 36ch;
+  max-width: 32ch;
+}
+
+/* Services CTA — gentle nudge for undecided visitors */
+.services__cta {
+  margin-top: clamp(40px, 6vw, 72px);
+  padding-top: clamp(32px, 4vw, 48px);
+  border-top: 0.5px solid var(--border-section);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.services__cta-line {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  color: var(--text);
 }
 
 /* Packages — three pricing cards, Signature highlighted */
@@ -1288,7 +1446,7 @@ img { display: block; max-width: 100%; }
 
 /* Sales sections — mobile */
 @media (max-width: 560px) {
-  .services__grid { grid-template-columns: 1fr; }
+  .services__grid { grid-template-columns: 1fr 1fr; }
   .process__steps { grid-template-columns: 1fr; }
   .package { padding: 28px 22px; }
 }
@@ -1457,12 +1615,13 @@ img { display: block; max-width: 100%; }
   /* Home gallery — show only the strongest images (hidden on mobile only) */
   .mobile-hide { display: none; }
 
-  /* Services — compact two-column */
-  .services__grid { grid-template-columns: 1fr 1fr; gap: 18px; }
-  .service { padding-top: 16px; }
-  .service__num { margin-bottom: 10px; }
-  .service__title { font-size: 15px; margin-bottom: 6px; }
-  .service__desc { font-size: 12px; line-height: 1.6; }
+  /* Services — compact two-column, square thumbnails to keep it short */
+  .services__grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .service__media { aspect-ratio: 1 / 1; margin-bottom: 10px; }
+  .service__tag { top: 8px; left: 8px; font-size: 8px; letter-spacing: 0.18em; padding: 4px 8px; }
+  .service__title { font-size: 18px; margin-bottom: 5px; }
+  .service__desc { font-size: 12px; line-height: 1.55; }
+  .services__cta { gap: 16px; }
 
   /* Packages — reduce internal padding, keep all info + highlight */
   .package { padding: 22px 18px; }
