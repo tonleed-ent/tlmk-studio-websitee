@@ -285,7 +285,7 @@ img { display: block; max-width: 100%; }
 .contact,
 .services,
 .packages,
-.process,
+.reel,
 .faq {
   padding: var(--pad-y) var(--pad-x);
   border-top: 0.5px solid var(--border-section);
@@ -1185,7 +1185,7 @@ img { display: block; max-width: 100%; }
 }
 
 /* ---------------------------------------------------------------------
-   17. Homepage sales sections — services, packages, process, FAQ
+   17. Homepage sales sections — services, packages, recent-work reel, FAQ
    --------------------------------------------------------------------- */
 .section-head { margin-bottom: 48px; }
 
@@ -1363,39 +1363,59 @@ img { display: block; max-width: 100%; }
   text-align: center;
 }
 
-/* Booking process — four numbered steps */
-.process__steps {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(20px, 2.5vw, 40px);
-  margin: 0;
-  padding: 0;
-}
-
-.process__step {
-  border-top: 0.5px solid var(--border-section);
-  padding-top: 20px;
-}
-
-.process__num {
-  display: block;
-  font-size: 24px;
-  font-weight: 300;
-  color: var(--faint);
-  margin-bottom: 14px;
-}
-
-.process__step h3 {
-  font-size: 15px;
-  font-weight: 400;
-  margin-bottom: 8px;
-}
-
-.process__step p {
+/* Recent work — horizontal proof reel (replaces the old booking-process list).
+   A scannable film-strip of recent frames; the photography carries it. */
+.reel__note {
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.8;
   color: var(--muted);
+  margin-top: 14px;
+  max-width: 46ch;
+}
+
+.reel__track {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.18) transparent;
+}
+.reel__track::-webkit-scrollbar { height: 4px; }
+.reel__track::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); }
+.reel__track::-webkit-scrollbar-track { background: transparent; }
+.reel__track:focus-visible { outline: 0.5px solid var(--border); outline-offset: 4px; }
+
+.reel__item {
+  position: relative;
+  flex: 0 0 auto;
+  height: clamp(320px, 52vh, 560px);
+  margin: 0;
+  overflow: hidden;
+  scroll-snap-align: start;
+  background: var(--hover-bg);
+}
+.reel__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.8);
+  transition: filter 0.6s ease, transform 0.6s ease;
+}
+.reel__item:hover img { filter: brightness(1); transform: scale(1.03); }
+
+.reel__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+@media (max-width: 560px) {
+  .reel__cta { flex-direction: column; }
+  .reel__cta .btn { text-align: center; }
 }
 
 /* FAQ — native accessible accordion, no JS */
@@ -1441,13 +1461,11 @@ img { display: block; max-width: 100%; }
 @media (max-width: 880px) {
   .services__grid { grid-template-columns: repeat(2, 1fr); }
   .packages__grid { grid-template-columns: 1fr; }
-  .process__steps { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* Sales sections — mobile */
 @media (max-width: 560px) {
   .services__grid { grid-template-columns: 1fr 1fr; }
-  .process__steps { grid-template-columns: 1fr; }
   .package { padding: 28px 22px; }
 }
 
@@ -1533,6 +1551,7 @@ img { display: block; max-width: 100%; }
     animation: none;
     text-shadow: 0 0 14px rgba(255,255,255,0.25);
   }
+  .reel__item:hover img { transform: none; }
 }
 
 /* ---------------------------------------------------------------------
@@ -1629,11 +1648,6 @@ img { display: block; max-width: 100%; }
   .package__list { margin-bottom: 22px; }
   .package__list li { padding: 10px 0; }
   .signature-bonus { margin-bottom: 22px; padding: 14px 16px; }
-
-  /* Booking process — 2x2 compact grid */
-  .process__steps { grid-template-columns: 1fr 1fr; gap: 22px 18px; }
-  .process__step { padding-top: 16px; }
-  .process__num { font-size: 20px; margin-bottom: 8px; }
 
   /* FAQ — tighter rows (still collapsed by default) */
   .faq__item summary { padding: 16px 0; font-size: 14px; }

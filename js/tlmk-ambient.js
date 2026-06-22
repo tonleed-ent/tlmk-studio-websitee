@@ -136,11 +136,23 @@
     if (CONFIG.grain) drawGrain();
     if (CONFIG.dust) { dctx.clearRect(0, 0, W, H); motes.forEach(drawMote); }
   } else {
-    (function loop() {
+    function loop() {
       frame++;
       if (CONFIG.grain && frame % 2 === 0) drawGrain();   // ~30fps grain
       if (CONFIG.dust) updateDust();
       raf = requestAnimationFrame(loop);
-    })();
+    }
+    raf = requestAnimationFrame(loop);
+
+    /* Pause the render loop while the tab is hidden — no visible change
+       (nothing is on screen), but it stops the grain/dust work and saves
+       CPU and battery. Resumes seamlessly when the tab is shown again. */
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        if (raf) { cancelAnimationFrame(raf); raf = null; }
+      } else if (!raf) {
+        raf = requestAnimationFrame(loop);
+      }
+    });
   }
 })();

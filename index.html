@@ -7,6 +7,8 @@
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="theme-color" content="#0A0A0A">
+  <!-- Preload the hero image only (first paint / LCP) -->
+  <link rel="preload" as="image" href="images/DSC01010.jpg" fetchpriority="high">
   <title>TLMK Studio — Cinematic photography, London</title>
   <meta name="description" content="TLMK Studio — modern cinematic photography in London. Portraits, editorial, and urban street.">
   <meta name="robots" content="index, follow">
@@ -31,8 +33,8 @@
   <!-- Decorative overlay; runs once per session above the real homepage. -->
   <div class="opening" id="opening">
     <div class="opening__stage" id="opening-stage">
-      <div class="opening__layer opening__blur"><img src="images/DSC01010.jpg" alt="" id="opening-blur-img"></div>
-      <div class="opening__layer opening__sharp" id="opening-sharp"><img src="images/DSC01010.jpg" alt="" id="opening-hero-img"></div>
+      <div class="opening__layer opening__blur"><img width="2000" height="1332" decoding="async" src="images/DSC01010.jpg" alt="" id="opening-blur-img"></div>
+      <div class="opening__layer opening__sharp" id="opening-sharp"><img width="2000" height="1332" decoding="async" src="images/DSC01010.jpg" alt="" id="opening-hero-img"></div>
     </div>
     <div class="opening__vignette"></div>
     <div class="opening__brackets" id="opening-brackets">
@@ -60,7 +62,7 @@
   <!-- ============================ HERO ============================ -->
   <section class="hero hero--home">
     <div class="hero__image">
-      <img src="images/DSC01010.jpg" alt="Two women in white and black at an outdoor café in warm evening light">
+      <img width="2000" height="1332" decoding="async" fetchpriority="high" src="images/DSC01010.jpg" alt="Two women in white and black at an outdoor café in warm evening light">
     </div>
     <div class="hero__content">
       <p class="eyebrow">London photography studio</p>
@@ -89,10 +91,10 @@
       <a href="about.html" class="btn">More about us</a>
     </div>
     <div class="about__grid">
-      <div class="ph"><img src="images/DSC01030.jpg" loading="lazy" alt="Portrait of a red-haired woman among green foliage"></div>
-      <div class="ph"><img src="images/DSC00940.jpg" loading="lazy" alt="Portrait of a smiling young man in a white hood and sunglasses"></div>
-      <div class="ph"><img src="images/DSC08392.jpg" loading="lazy" alt="Two women in black dresses at a softly lit café"></div>
-      <div class="ph"><img src="images/DSC01045.jpg" loading="lazy" alt="Portrait of a blonde woman in black wearing sunglasses by the river"></div>
+      <div class="ph"><img width="1066" height="1600" decoding="async" src="images/DSC01030.jpg" loading="lazy" alt="Portrait of a red-haired woman among green foliage"></div>
+      <div class="ph"><img width="1600" height="1066" decoding="async" src="images/DSC00940.jpg" loading="lazy" alt="Portrait of a smiling young man in a white hood and sunglasses"></div>
+      <div class="ph"><img width="1600" height="1066" decoding="async" src="images/DSC08392.jpg" loading="lazy" alt="Two women in black dresses at a softly lit café"></div>
+      <div class="ph"><img width="1066" height="1600" decoding="async" src="images/DSC01045.jpg" loading="lazy" alt="Portrait of a blonde woman in black wearing sunglasses by the river"></div>
     </div>
   </section>
 
@@ -106,36 +108,36 @@
     <div class="gallery__grid">
       <div class="gallery__stack gallery__stack--left">
         <figure class="gallery__item gallery__item--tall">
-          <div class="ph"><img src="images/DSC01051.jpg" loading="lazy" alt="Portrait of a blonde woman in black by the river at dusk"></div>
+          <div class="ph"><img width="1066" height="1600" decoding="async" src="images/DSC01051.jpg" loading="lazy" alt="Portrait of a blonde woman in black by the river at dusk"></div>
           <figcaption class="gallery__overlay"><span>View</span></figcaption>
           <span class="gallery__num">TLMK / 001</span>
         </figure>
         <figure class="gallery__item gallery__item--small mobile-hide">
-          <div class="ph"><img src="images/DSC01026.jpg" loading="lazy" alt="Portrait of a smiling young man in front of green hedges"></div>
+          <div class="ph"><img width="1600" height="1066" decoding="async" src="images/DSC01026.jpg" loading="lazy" alt="Portrait of a smiling young man in front of green hedges"></div>
           <figcaption class="gallery__overlay"><span>View</span></figcaption>
           <span class="gallery__num">TLMK / 004</span>
         </figure>
       </div>
 
       <figure class="gallery__item gallery__item--feature">
-        <div class="gallery__feature-media"><img src="images/DSC01068.jpg" loading="lazy" alt="Portrait of a red-haired woman in a white shirt at dusk"></div>
+        <div class="gallery__feature-media"><img width="1066" height="1600" decoding="async" src="images/DSC01068.jpg" loading="lazy" alt="Portrait of a red-haired woman in a white shirt at dusk"></div>
         <figcaption class="gallery__overlay"><span>View</span></figcaption>
         <span class="gallery__num">TLMK / 003</span>
       </figure>
 
       <div class="gallery__stack gallery__stack--right">
         <figure class="gallery__item gallery__item--small">
-          <div class="ph"><img src="images/DSC01033.jpg" loading="lazy" alt="Black and white portrait of a young woman"></div>
+          <div class="ph"><img width="1066" height="1600" decoding="async" src="images/DSC01033.jpg" loading="lazy" alt="Black and white portrait of a young woman"></div>
           <figcaption class="gallery__overlay"><span>View</span></figcaption>
           <span class="gallery__num">TLMK / 002</span>
         </figure>
         <figure class="gallery__item gallery__item--small mobile-hide">
-          <div class="ph"><img src="images/DSC01063.jpg" loading="lazy" alt="Portrait of a young woman in a white shirt by the river at dusk"></div>
+          <div class="ph"><img width="1066" height="1600" decoding="async" src="images/DSC01063.jpg" loading="lazy" alt="Portrait of a young woman in a white shirt by the river at dusk"></div>
           <figcaption class="gallery__overlay"><span>View</span></figcaption>
           <span class="gallery__num">TLMK / 005</span>
         </figure>
         <figure class="gallery__item gallery__item--wide">
-          <div class="ph"><img src="images/DSC01070.jpg" loading="lazy" alt="Red-haired woman in a white shirt looking out over the river"></div>
+          <div class="ph"><img width="1600" height="1066" decoding="async" src="images/DSC01070.jpg" loading="lazy" alt="Red-haired woman in a white shirt looking out over the river"></div>
           <figcaption class="gallery__overlay"><span>View</span></figcaption>
           <span class="gallery__num">TLMK / 006</span>
         </figure>
@@ -157,7 +159,7 @@
     <div class="services__grid">
       <article class="service">
         <div class="service__media">
-          <img src="images/DSC01030.jpg" loading="lazy" alt="Portrait of a red-haired woman among green foliage">
+          <img width="1066" height="1600" decoding="async" src="images/DSC01030.jpg" loading="lazy" alt="Portrait of a red-haired woman among green foliage">
           <span class="service__tag">Portraits</span>
         </div>
         <h3 class="service__title">Portraits</h3>
@@ -165,7 +167,7 @@
       </article>
       <article class="service">
         <div class="service__media">
-          <img src="images/DSC08392.jpg" loading="lazy" alt="Two women in black dresses at a softly lit café">
+          <img width="1600" height="1066" decoding="async" src="images/DSC08392.jpg" loading="lazy" alt="Two women in black dresses at a softly lit café">
           <span class="service__tag">Couples</span>
         </div>
         <h3 class="service__title">Couples</h3>
@@ -173,7 +175,7 @@
       </article>
       <article class="service">
         <div class="service__media">
-          <img src="images/DSC00939.jpg" loading="lazy" alt="Cinematic portrait of a young man in a white hood and dark sunglasses">
+          <img width="1600" height="1066" decoding="async" src="images/DSC00939.jpg" loading="lazy" alt="Cinematic portrait of a young man in a white hood and dark sunglasses">
           <span class="service__tag">Editorial</span>
         </div>
         <h3 class="service__title">Editorial</h3>
@@ -181,7 +183,7 @@
       </article>
       <article class="service">
         <div class="service__media">
-          <img src="images/IMG_3794.jpg" loading="lazy" alt="White BMW and black Mercedes parked on a London street at golden hour">
+          <img width="1050" height="1400" decoding="async" src="images/IMG_3794.jpg" loading="lazy" alt="White BMW and black Mercedes parked on a London street at golden hour">
           <span class="service__tag">Cars</span>
         </div>
         <h3 class="service__title">Cars</h3>
@@ -189,7 +191,7 @@
       </article>
       <article class="service">
         <div class="service__media">
-          <img src="images/DSC00521.jpg" loading="lazy" alt="Portrait of a man in white sunglasses outdoors at blue hour">
+          <img width="1066" height="1600" decoding="async" src="images/DSC00521.jpg" loading="lazy" alt="Portrait of a man in white sunglasses outdoors at blue hour">
           <span class="service__tag">Events</span>
         </div>
         <h3 class="service__title">Events</h3>
@@ -197,7 +199,7 @@
       </article>
       <article class="service">
         <div class="service__media">
-          <img src="images/DSC01068.jpg" loading="lazy" alt="Polished portrait of a red-haired woman in a white shirt at dusk">
+          <img width="1066" height="1600" decoding="async" src="images/DSC01068.jpg" loading="lazy" alt="Polished portrait of a red-haired woman in a white shirt at dusk">
           <span class="service__tag">Retouching</span>
         </div>
         <h3 class="service__title">Retouching</h3>
@@ -266,35 +268,55 @@
     </div>
   </section>
 
-  <!-- ======================== BOOKING PROCESS ======================== -->
-  <section class="process">
+  <!-- ====================== RECENT WORK / PROOF ====================== -->
+  <!-- Visual proof band — replaces the old text booking-process list.
+       Near-zero copy: let the recent frames carry the section. -->
+  <section class="reel">
     <header class="section-head">
-      <p class="eyebrow">How it works</p>
-      <h2 class="display">Booking process</h2>
+      <p class="eyebrow">Recent work</p>
+      <h2 class="display">Latest frames.</h2>
+      <p class="reel__note">New work most weeks across London — see more on Instagram.</p>
     </header>
 
-    <ol class="process__steps">
-      <li class="process__step">
-        <span class="process__num">01</span>
-        <h3>Send an enquiry</h3>
-        <p>Message us on WhatsApp or through the form with what you have in mind.</p>
-      </li>
-      <li class="process__step">
-        <span class="process__num">02</span>
-        <h3>Confirm the shoot details</h3>
-        <p>We agree on the date, location and the look you're after.</p>
-      </li>
-      <li class="process__step">
-        <span class="process__num">03</span>
-        <h3>Attend the session</h3>
-        <p>We shoot in a relaxed setting with clear direction throughout.</p>
-      </li>
-      <li class="process__step">
-        <span class="process__num">04</span>
-        <h3>Receive professionally edited photos</h3>
-        <p>Your selected images are carefully edited and delivered to you.</p>
-      </li>
-    </ol>
+    <div class="reel__track" role="region" aria-label="Recent TLMK Studio photography" tabindex="0">
+      <figure class="reel__item" style="aspect-ratio: 1066 / 1600;">
+        <img width="1066" height="1600" decoding="async" loading="lazy" src="images/DSC01053.jpg" alt="Portrait of a blonde woman in a black dress by the river at dusk">
+        <span class="gallery__num">TLMK / 001</span>
+      </figure>
+      <figure class="reel__item" style="aspect-ratio: 1600 / 1066;">
+        <img width="1600" height="1066" decoding="async" loading="lazy" src="images/DSC00940.jpg" alt="Portrait of a smiling young man in a white hood and sunglasses">
+        <span class="gallery__num">TLMK / 002</span>
+      </figure>
+      <figure class="reel__item" style="aspect-ratio: 1050 / 1400;">
+        <img width="1050" height="1400" decoding="async" loading="lazy" src="images/IMG_3794.jpg" alt="White BMW and black Mercedes parked on a London street at golden hour">
+        <span class="gallery__num">TLMK / 003</span>
+      </figure>
+      <figure class="reel__item" style="aspect-ratio: 1066 / 1600;">
+        <img width="1066" height="1600" decoding="async" loading="lazy" src="images/DSC01098.jpg" alt="Portrait of a man in a straw hat and white polo shirt">
+        <span class="gallery__num">TLMK / 004</span>
+      </figure>
+      <figure class="reel__item" style="aspect-ratio: 1600 / 1066;">
+        <img width="1600" height="1066" decoding="async" loading="lazy" src="images/DSC08392.jpg" alt="Two women in black dresses at a softly lit café">
+        <span class="gallery__num">TLMK / 005</span>
+      </figure>
+      <figure class="reel__item" style="aspect-ratio: 1066 / 1600;">
+        <img width="1066" height="1600" decoding="async" loading="lazy" src="images/DSC00511.jpg" alt="Portrait of a man in glasses and a patterned scarf beside a car">
+        <span class="gallery__num">TLMK / 006</span>
+      </figure>
+      <figure class="reel__item" style="aspect-ratio: 1066 / 1600;">
+        <img width="1066" height="1600" decoding="async" loading="lazy" src="images/DSC01045.jpg" alt="Portrait of a blonde woman in black wearing sunglasses by the river">
+        <span class="gallery__num">TLMK / 007</span>
+      </figure>
+      <figure class="reel__item" style="aspect-ratio: 1066 / 1600;">
+        <img width="1066" height="1600" decoding="async" loading="lazy" src="images/DSC00521.jpg" alt="Portrait of a man in white sunglasses outdoors at blue hour">
+        <span class="gallery__num">TLMK / 008</span>
+      </figure>
+    </div>
+
+    <div class="reel__cta">
+      <a href="https://wa.me/447862272555?text=Hi%20TLMK%20Studio%2C%20I%27m%20interested%20in%20booking%20a%20photoshoot%20in%20London." class="btn btn--primary" target="_blank" rel="noopener" aria-label="Book a session on WhatsApp">Book on WhatsApp</a>
+      <a href="https://instagram.com/tlmkstudio" class="btn" target="_blank" rel="noopener">See more on Instagram</a>
+    </div>
   </section>
 
   <!-- ============================== FAQ ============================== -->
@@ -415,8 +437,8 @@
   <!-- Mobile-only sticky booking button -->
   <a href="https://wa.me/447862272555?text=Hi%20TLMK%20Studio%2C%20I%27m%20interested%20in%20booking%20a%20photoshoot%20in%20London." class="sticky-book" target="_blank" rel="noopener" aria-label="Book a session on WhatsApp">Book on WhatsApp</a>
 
-  <script src="js/main.js"></script>
-  <script src="js/tlmk-ambient.js"></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/tlmk-ambient.js" defer></script>
   <script>
     // Hide the sticky button while the contact section is on screen,
     // so it never covers the form controls.
