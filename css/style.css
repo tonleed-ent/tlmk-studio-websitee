@@ -1280,10 +1280,10 @@ img { display: block; max-width: 100%; }
   color: var(--text);
 }
 
-/* Packages — three pricing cards, Signature highlighted */
+/* Packages — pricing cards, Signature highlighted */
 .packages__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: clamp(16px, 2vw, 24px);
   align-items: stretch;
 }
@@ -1361,6 +1361,71 @@ img { display: block; max-width: 100%; }
 .package .btn {
   margin-top: auto;
   text-align: center;
+}
+
+.packages__extras {
+  margin-top: clamp(24px, 3vw, 40px);
+  border: 0.5px solid var(--border);
+  padding: 28px;
+}
+
+.extras__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: clamp(24px, 4vw, 64px);
+  list-style: none;
+  margin-top: 20px;
+  border-top: 0.5px solid var(--border-section);
+}
+
+.extras__list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 0.5px solid var(--border-section);
+  font-size: 12px;
+}
+
+.extras__list li span:first-child {
+  color: rgba(255,255,255,0.72);
+}
+
+.extras__list li span:last-child {
+  color: var(--text);
+  text-align: right;
+}
+
+.packages__notices {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 2vw, 24px);
+  margin-top: clamp(16px, 2vw, 24px);
+}
+
+.packages__notices p {
+  border: 0.5px solid var(--border);
+  padding: 22px 28px;
+}
+
+.packages__notices strong,
+.packages__notices span {
+  display: block;
+}
+
+.packages__notices strong {
+  margin-bottom: 8px;
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--faint);
+}
+
+.packages__notices span {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.72);
 }
 
 /* Recent work — horizontal proof reel (replaces the old booking-process list).
@@ -1461,101 +1526,24 @@ img { display: block; max-width: 100%; }
 @media (max-width: 880px) {
   .services__grid { grid-template-columns: repeat(2, 1fr); }
   .packages__grid { grid-template-columns: 1fr; }
+  .packages__notices { grid-template-columns: 1fr; }
 }
 
 /* Sales sections — mobile */
 @media (max-width: 560px) {
   .services__grid { grid-template-columns: 1fr 1fr; }
   .package { padding: 28px 22px; }
+  .packages__extras { padding: 22px; }
+  .extras__list { grid-template-columns: 1fr; }
+  .packages__notices p { padding: 20px 22px; }
 }
 
-/* ---------------------------------------------------------------------
-   18. Signature Bonus — premium offer inside the Signature card
-   CSS-only: slow light sweep + gentle glow on the "+5". Monochrome.
-   --------------------------------------------------------------------- */
-.signature-bonus {
-  position: relative;
-  overflow: hidden;
-  margin: 0 0 28px;
-  padding: 18px 20px;
-  border: 0.5px solid rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.04);
-  box-shadow: inset 0 0 24px rgba(255,255,255,0.04);
-}
-
-/* Slow diagonal light sweep, pausing off-card between passes */
-.signature-bonus::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -60%;
-  width: 45%;
-  height: 100%;
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.10), transparent);
-  transform: skewX(-18deg);
-  pointer-events: none;
-  animation: bonusSweep 6.5s ease-in-out infinite;
-}
-
-@keyframes bonusSweep {
-  0%        { left: -60%; }
-  55%, 100% { left: 150%; }
-}
-
-.signature-bonus__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.signature-bonus__label {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  color: var(--muted);
-}
-
-.signature-bonus__plus {
-  font-size: clamp(30px, 4vw, 40px);
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  color: var(--text);
-  animation: bonusGlow 3.4s ease-in-out infinite;
-}
-
-@keyframes bonusGlow {
-  0%, 100% { text-shadow: 0 0 0 rgba(255,255,255,0); }
-  50%      { text-shadow: 0 0 14px rgba(255,255,255,0.35); }
-}
-
-.signature-bonus__text {
-  font-size: 12px;
-  line-height: 1.6;
-  color: rgba(255,255,255,0.72);
-  margin-top: 12px;
-}
-
-.signature-bonus__note {
-  font-size: 10px;
-  letter-spacing: 0.04em;
-  color: var(--faint);
-  margin-top: 8px;
-}
-
-/* Reduced motion: no movement; keep a soft static glow only */
 @media (prefers-reduced-motion: reduce) {
-  .signature-bonus::after { display: none; }
-  .signature-bonus__plus {
-    animation: none;
-    text-shadow: 0 0 14px rgba(255,255,255,0.25);
-  }
   .reel__item:hover img { transform: none; }
 }
 
 /* ---------------------------------------------------------------------
-   19. Accessibility — focus states, lightbox nav, reduced motion
+   18. Accessibility — focus states, lightbox nav, reduced motion
    --------------------------------------------------------------------- */
 
 /* Visible keyboard focus, subtle and on-brand (white outline) */
@@ -1647,8 +1635,6 @@ img { display: block; max-width: 100%; }
   .package__price { margin: 18px 0; }
   .package__list { margin-bottom: 22px; }
   .package__list li { padding: 10px 0; }
-  .signature-bonus { margin-bottom: 22px; padding: 14px 16px; }
-
   /* FAQ — tighter rows (still collapsed by default) */
   .faq__item summary { padding: 16px 0; font-size: 14px; }
   .faq__answer { padding-bottom: 16px; }
