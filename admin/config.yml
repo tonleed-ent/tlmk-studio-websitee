@@ -1,0 +1,65 @@
+backend:
+  name: github
+  repo: tonleed-ent/tlmk-studio-websitee
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+publish_mode: editorial_workflow
+media_folder: images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: image_content
+    label: Image Content
+    files:
+      - name: portfolio_images
+        label: Portfolio Images
+        file: data/portfolio-images.json
+        format: json
+        fields:
+          - name: images
+            label: Images
+            widget: list
+            summary: "{{fields.order}} - {{fields.title}}"
+            fields:
+              - name: image
+                label: Image
+                widget: image
+              - name: title
+                label: Title
+                widget: string
+              - name: alt
+                label: Alt Text
+                widget: text
+              - name: category
+                label: Category
+                widget: select
+                options:
+                  - Portraits
+                  - Couples
+                  - Lifestyle
+                  - Cars
+                  - Events
+                  - Editing
+              - name: order
+                label: Order
+                widget: number
+                value_type: int
+                min: 1
+                step: 1
+              - name: featured
+                label: Featured
+                widget: boolean
+                default: false
+                required: false
+              - name: showOnHomepage
+                label: Show On Homepage
+                widget: boolean
+                default: false
+                required: false
+              - name: visible
+                label: Visible
+                widget: boolean
+                default: true
+                required: false
