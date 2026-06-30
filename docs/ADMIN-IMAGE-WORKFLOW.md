@@ -18,6 +18,20 @@ Manual owner steps:
 
 Never commit OAuth client secrets, API keys, tokens, or Netlify credentials to this repository.
 
+## Decap CMS Bundle
+
+The admin self-hosts Decap CMS from `admin/vendor/` instead of loading it from a public CDN. The pinned version is `decap-cms@3.14.1` from the npm package `decap-cms`.
+
+The main admin entry loads `/admin/vendor/decap-cms.js`. Decap's production bundle is code-split, so the matching `*.decap-cms.js` chunks and `decap-cms.js.LICENSE.txt` from the same npm package must stay in `admin/vendor/`.
+
+Future Decap upgrades must be manual:
+
+1. Review the new package version, license, and npm integrity metadata.
+2. Download the pinned package without installing project dependencies.
+3. Replace the main bundle, matching chunks, and license notice together.
+4. Confirm `/admin/` still loads, logs in, previews content, uploads media, and publishes through Git.
+5. Confirm no public pages, gallery rendering, prices, policies, contact details, tracking, hosting, or deployment settings changed.
+
 ## Upload And Publishing Flow
 
 The prototype collection edits `data/portfolio-images.json`. Uploaded files are configured to go to `images/uploads`.
@@ -59,6 +73,12 @@ Do not migrate current production images until the admin login, preview, orderin
 
 Netlify Image CDN integration is planned for Phase 2. The goal is to keep uploaded originals safe while serving optimized resized images from delivery URLs. Phase 2 should update rendering paths only after testing layout, lightbox quality, mobile performance, and cache behavior.
 
+## CSP Verification
+
+The public site CSP should remain strict. `/admin/*` needs a scoped CSP that allows the self-hosted Decap scripts and the required GitHub/Netlify API connections.
+
+After any deploy that changes `_headers`, verify the deployed `/admin/` response headers. If Netlify sends both the global `/*` CSP and the scoped `/admin/*` CSP, the stricter global CSP may still block the admin even though the scoped rule exists.
+
 ## Rollback Process
 
 Because content is Git-backed, rollback should use Git history:
@@ -72,6 +92,7 @@ Because content is Git-backed, rollback should use Git history:
 
 - OAuth misconfiguration can grant repository write access to the wrong users.
 - Committed secrets would expose production credentials.
-- The current `_headers` Content Security Policy blocks external scripts and non-self connections, so Decap and OAuth will need a future approved CSP update before the hosted admin can function.
+- OAuth remains manually configured and incomplete until the owner creates the GitHub OAuth app and configures the Netlify OAuth provider.
+- The current `_headers` Content Security Policy needs deployed-response verification because overlapping CSP headers may remain restrictive.
 - Uploading very large images directly to Git can make the repository slow.
 - Admin content must not be allowed to edit CSS, JavaScript, prices, policies, contact details, tracking, hosting, DNS, or deployment settings.

@@ -5,3 +5,8 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Cross-Origin-Opener-Policy: same-origin
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; media-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'self'; object-src 'none'
+
+# Verify deployed /admin/ response headers after deploy. If Netlify sends both
+# this scoped CSP and the global /* CSP, the stricter global CSP may still apply.
+/admin/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://api.netlify.com https://api.github.com; frame-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'self'; object-src 'none'
